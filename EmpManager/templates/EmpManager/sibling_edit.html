@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% load myfilters %}
+{% block title %}
+	Sibling Edit
+{% endblock %}
+
+{% block content %}
+
+<form method="post" action="{% url 'sibling_edit' sibling.id %}">
+					<div class="modal-header">						
+						<h4 class="modal-title">Edit Sibling</h4>
+						<a href="{% url 'employee_list' %}" class="btn btn-info close" data-toggle="modal"><i class="material-icons">home</i> <span>Home</span></a>
+					</div>
+					<div class="modal-body">
+						{% csrf_token %}
+						{% for field in form %}					
+						<div class="form-group">
+							{{ field.errors }}
+							<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+							{{ field|addcss:'form-control' }}
+						</div>
+
+						{% endfor %}				
+									
+					</div>
+					<div class="modal-footer">
+						<a href="{% url 'siblings_list' employee %}"><input type="button"  class="btn btn-default" data-dismiss="modal" value="Cancel"></a>
+						<input type="submit" class="btn btn-info" value="Save">
+					</div>
+				</form>
+{% endblock %}
